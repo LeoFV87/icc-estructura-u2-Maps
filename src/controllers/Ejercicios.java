@@ -1,6 +1,7 @@
 package controllers;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class Ejercicios {
 
@@ -28,9 +29,38 @@ public class Ejercicios {
      * frecuencia.
      */
     public static boolean areAnagrams(String str1, String str2) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        boolean respuesta= false;
+
+      if(str1.length() == str2.length()){
+        HashMap<Character, Integer> map1 = new HashMap<>();
+        HashMap<Character, Integer> map2= new HashMap<>();
+
+        for (char c : str1.toCharArray()) {
+            map1.put(c, map1.getOrDefault(c, 0) + 1);
+        }
+
+        // Contar frecuencia de caracteres en str2
+        for (char c : str2.toCharArray()) {
+            map2.put(c, map2.getOrDefault(c, 0) + 1);
+        }
+
+        if(map1.equals(map2)){
+            respuesta= true;
+            return respuesta;
+        } else {
+            return false;
+        }
+      } else {
+        respuesta = false;
+        return respuesta;
+      }
+      
+
 
     }
+
+
+
 
     /*
      * Dado un array de números enteros y un objetivo, retorna los índices de dos
@@ -48,6 +78,31 @@ public class Ejercicios {
      * Output: null
      */
     public int[] sumatoriaDeDos(int[] nums, int objetivo) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        
+        Map<Integer, Integer> mapita = new HashMap<>();
+
+        // BARRIDO
+        for (int i = 0; i < nums.length; i++) {
+            int complemento = objetivo - nums[i];
+
+            
+            // Verificar si el complemento existe en el mapa
+            if (mapita.containsKey(complemento)) {
+                
+                return new int[] { mapita.get(complemento), i };
+            }
+            
+            mapita.put(nums[i], i);
+        }
+        
+   
+        throw new IllegalArgumentException("No hay dos números que sumen al objetivo.");
     }
-}
+
+    }
+
+
+
+
+
+
